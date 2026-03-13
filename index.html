@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripFactory Incentive Commission Scheme 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #e2e8f0; }
+        .gradient-text { background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-panel { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(148, 163, 184, 0.1); }
+        .input-slider { -webkit-appearance: none; width: 100%; height: 8px; border-radius: 4px; background: #334155; outline: none; }
+        .input-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #60a5fa; cursor: pointer; border: 2px solid #1e293b; }
+        .tab-active { border-bottom: 3px solid #60a5fa; color: #60a5fa; }
+        .explanation-card { border-left: 4px solid #60a5fa; }
+    </style>
+<base target="_blank">
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="glass-panel sticky top-0 z-50 border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">TF</div>
+                    <div>
+                        <h1 class="text-2xl font-bold gradient-text">Incentive Commission Scheme 2026</h1>
+                        <p class="text-sm text-slate-400">Complete Staff: <span class="text-emerald-400 font-bold">697 employees</span></p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-slate-400">Total Monthly Payout</div>
+                    <div id="header-payout" class="text-xl font-bold text-emerald-400">₹0</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <div class="glass-panel border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4">
+            <nav class="flex gap-4 overflow-x-auto text-sm">
+                <button onclick="showTab('explanation')" id="tab-explanation" class="tab-active py-4 px-2 font-medium whitespace-nowrap">📋 Explanation</button>
+                <button onclick="showTab('overview')" id="tab-overview" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">📊 Overview</button>
+                <button onclick="showTab('sales')" id="tab-sales" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">💰 Sales</button>
+                <button onclick="showTab('operations')" id="tab-operations" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">⚙️ Operations</button>
+                <button onclick="showTab('ticketing')" id="tab-ticketing" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">✈️ Ticketing</button>
+                <button onclick="showTab('service')" id="tab-service" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">🎧 Service</button>
+                <button onclick="showTab('marketing')" id="tab-marketing" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">📢 Marketing</button>
+                <button onclick="showTab('leadership')" id="tab-leadership" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">👑 Leadership</button>
+                <button onclick="showTab('company')" id="tab-company" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">🏢 Company Payout</button>
+            </nav>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+
+        <!-- EXPLANATION TAB -->
+        <div id="content-explanation" class="tab-content">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2 gradient-text">Commission Scheme Explanation</h2>
+                <p class="text-slate-400">Complete guide for management review and staff presentation</p>
+            </div>
+
+            <div class="glass-panel rounded-2xl p-6 mb-6 explanation-card">
+                <h3 class="text-xl font-bold mb-4 text-blue-400">🎯 Executive Summary</h3>
+                <p class="text-slate-300 mb-4">This incentive scheme aligns all <strong>697 staff members</strong> across 8 departments toward common company goals. Every employee can earn additional income based on performance.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-slate-800/50 rounded-xl">
+                        <div class="text-2xl font-bold text-emerald-400">₹50K-2L</div>
+                        <div class="text-sm text-slate-400">Potential monthly commission</div>
+                    </div>
+                    <div class="p-4 bg-slate-800/50 rounded-xl">
+                        <div class="text-2xl font-bold text-blue-400">12-25</div>
+                        <div class="text-sm text-slate-400">Minimum targets</div>
+                    </div>
+                    <div class="p-4 bg-slate-800/50 rounded-xl">
+                        <div class="text-2xl font-bold text-purple-400">1.5x-2x</div>
+                        <div class="text-sm text-slate-400">Accelerator multipliers</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="glass-panel rounded-2xl p-6">
+                    <h3 class="text-lg font-bold mb-4 text-emerald-400">✅ How It Works</h3>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold text-sm shrink-0">1</div>
+                            <div>
+                                <div class="font-semibold">Meet Minimum Target</div>
+                                <div class="text-sm text-slate-400">Each department has a threshold (e.g., Sales: 12 bookings)</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold text-sm shrink-0">2</div>
+                            <div>
+                                <div class="font-semibold">Earn Base Commission</div>
+                                <div class="text-sm text-slate-400">Standard rates apply once target is met</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold text-sm shrink-0">3</div>
+                            <div>
+                                <div class="font-semibold">Accelerate</div>
+                                <div class="text-sm text-slate-400">Hit stretch goals for multipliers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-6">
+                    <h3 class="text-lg font-bold mb-4 text-amber-400">⚠️ Important Rules</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex items-start gap-2">
+                            <span class="text-rose-400">•</span>
+                            <span>No accelerators unless minimum targets met</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-rose-400">•</span>
+                            <span>Sales must have &lt;5% cancellation rate</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-rose-400">•</span>
+                            <span>TLs earn override only if team hits 80%</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-rose-400">•</span>
+                            <span>Commissions paid on 5th of following month</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-2xl p-6">
+                <h3 class="text-lg font-bold mb-4 text-purple-400">🏢 Department Breakdown (697 Total Staff)</h3>
+                <table class="w-full text-sm">
+                    <thead class="text-slate-400 border-b border-slate-700">
+                        <tr>
+                            <th class="text-left py-3">Department</th>
+                            <th class="text-center py-3">Count</th>
+                            <th class="text-left py-3">Commission Type</th>
+                            <th class="text-left py-3">Min Target</th>
+                            <th class="text-left py-3">Max Potential</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800">
+                        <tr><td class="py-3 text-blue-400">Sales</td><td class="text-center">42</td><td>Per booking + Focus dest</td><td>12 bookings</td><td class="text-emerald-400">₹75K/mo</td></tr>
+                        <tr><td class="py-3 text-orange-400">Operations</td><td class="text-center">285</td><td>Team pool + Per query</td><td>80% resolution</td><td class="text-emerald-400">₹25K/mo</td></tr>
+                        <tr><td class="py-3 text-emerald-400">Ticketing</td><td class="text-center">48</td><td>% of savings</td><td>₹50K savings</td><td class="text-emerald-400">₹40K/mo</td></tr>
+                        <tr><td class="py-3 text-purple-400">Customer Service</td><td class="text-center">65</td><td>Per prevented complaint</td><td>&lt;5% complaints</td><td class="text-emerald-400">₹1L/mo</td></tr>
+                        <tr><td class="py-3 text-pink-400">Marketing</td><td class="text-center">18</td><td>% of ROI gain</td><td>15% improvement</td><td class="text-emerald-400">₹50K/mo</td></tr>
+                        <tr><td class="py-3 text-indigo-400">Team Leaders</td><td class="text-center">35</td><td>15% team override</td><td>Team 80%</td><td class="text-emerald-400">₹60K/mo</td></tr>
+                        <tr><td class="py-3 text-rose-400">Management</td><td class="text-center">12</td><td>25% dept override</td><td>Dept 85%</td><td class="text-emerald-400">₹1.5L/mo</td></tr>
+                        <tr><td class="py-3 text-slate-400">Support</td><td class="text-center">192</td><td>Company bonus</td><td>Company target</td><td class="text-emerald-400">₹15K/mo</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- COMPANY PAYOUT TAB -->
+        <div id="content-company" class="tab-content hidden">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold mb-2 gradient-text">Company Payout Calculator</h2>
+                <p class="text-slate-400">Select staff, destinations, and volumes to calculate total liability</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="glass-panel rounded-2xl p-6">
+                    <h3 class="text-lg font-bold mb-4 text-blue-400">⚙️ Configuration</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-2">Department</label>
+                            <select id="comp-dept" class="w-full bg-slate-800 border border-slate-700 rounded p-2" onchange="updateCompany()">
+                                <option value="sales">Sales (42 staff)</option>
+                                <option value="operations">Operations (285)</option>
+                                <option value="ticketing">Ticketing (48)</option>
+                                <option value="service">Customer Service (65)</option>
+                                <option value="marketing">Marketing (18)</option>
+                                <option value="all">All Departments (697)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-2">Focus Destination</label>
+                            <select id="comp-dest" class="w-full bg-slate-800 border border-slate-700 rounded p-2" onchange="updateCompany()">
+                                <option value="500">Standard (₹500)</option>
+                                <option value="1500">Thailand/Dubai/SG (₹1,500)</option>
+                                <option value="2000">Turkey (₹2,000)</option>
+                                <option value="2500">Europe (₹2,500)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-2">Bookings/Person: <span id="comp-book-val" class="text-blue-400">15</span></label>
+                            <input type="range" id="comp-book" min="5" max="40" value="15" class="input-slider" oninput="updateCompany()">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-2">Focus %: <span id="comp-focus-val" class="text-purple-400">30</span>%</label>
+                            <input type="range" id="comp-focus" min="0" max="100" value="30" class="input-slider" oninput="updateCompany()">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-2">Achievement</label>
+                            <select id="comp-achieve" class="w-full bg-slate-800 border border-slate-700 rounded p-2" onchange="updateCompany()">
+                                <option value="0.7">70% - Below Target</option>
+                                <option value="1.0" selected>100% - On Target</option>
+                                <option value="1.3">130% - Over</option>
+                                <option value="1.5">150% - High</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-6 lg:col-span-2">
+                    <h3 class="text-lg font-bold mb-4 text-emerald-400">💰 Payout Analysis</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="p-4 bg-slate-800/50 rounded-xl text-center">
+                            <div class="text-sm text-slate-400">Staff</div>
+                            <div id="comp-staff" class="text-2xl font-bold text-blue-400">42</div>
+                        </div>
+                        <div class="p-4 bg-slate-800/50 rounded-xl text-center">
+                            <div class="text-sm text-slate-400">Bookings</div>
+                            <div id="comp-bookings" class="text-2xl font-bold text-purple-400">630</div>
+                        </div>
+                        <div class="p-4 bg-slate-800/50 rounded-xl text-center">
+                            <div class="text-sm text-slate-400">Avg/Person</div>
+                            <div id="comp-avg" class="text-2xl font-bold text-amber-400">₹18,750</div>
+                        </div>
+                        <div class="p-4 bg-emerald-900/30 rounded-xl text-center border border-emerald-500/30">
+                            <div class="text-sm text-emerald-400">Total</div>
+                            <div id="comp-total" class="text-2xl font-bold text-emerald-400">₹7,87,500</div>
+                        </div>
+                    </div>
+
+                    <canvas id="compChart" height="200"></canvas>
+
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <div class="p-4 bg-slate-800/50 rounded-xl">
+                            <div class="text-sm text-slate-400">Monthly Cost</div>
+                            <div id="comp-month" class="text-3xl font-bold text-white">₹7,87,500</div>
+                        </div>
+                        <div class="p-4 bg-slate-800/50 rounded-xl">
+                            <div class="text-sm text-slate-400">Annual Cost</div>
+                            <div id="comp-year" class="text-3xl font-bold text-emerald-400">₹94,50,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SALES TAB -->
+        <div id="content-sales" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="glass-panel rounded-2xl p-6">
+                    <h3 class="text-xl font-bold mb-6 text-blue-400">Sales Calculator</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-sm text-slate-400">Bookings: <span id="sales-book-val" class="text-blue-400 font-bold">15</span></label>
+                            <input type="range" id="sales-book" min="0" max="50" value="15" class="input-slider" oninput="updateSales()">
+                        </div>
+                        <div>
+                            <label class="text-sm text-slate-400">Focus %: <span id="sales-focus-val" class="text-purple-400 font-bold">30</span>%</label>
+                            <input type="range" id="sales-focus" min="0" max="100" value="30" class="input-slider" oninput="updateSales()">
+                        </div>
+                        <div>
+                            <label class="text-sm text-slate-400">Fixed Tours: <span id="sales-tour-val" class="text-amber-400 font-bold">3</span></label>
+                            <input type="range" id="sales-tour" min="0" max="20" value="3" class="input-slider" oninput="updateSales()">
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-panel rounded-2xl p-6">
+                    <h3 class="text-xl font-bold mb-6 text-emerald-400">Earnings</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between p-3 bg-slate-800/50 rounded"><span>Standard</span><span id="sales-std" class="font-bold">₹5,250</span></div>
+                        <div class="flex justify-between p-3 bg-slate-800/50 rounded"><span>Focus</span><span id="sales-focus-comm" class="font-bold text-purple-400">₹6,750</span></div>
+                        <div class="flex justify-between p-3 bg-slate-800/50 rounded"><span>Tours</span><span id="sales-tour-comm" class="font-bold text-amber-400">₹6,000</span></div>
+                        <div class="flex justify-between p-4 bg-emerald-900/30 rounded-lg border border-emerald-500/50">
+                            <span class="font-bold">Total</span>
+                            <span id="sales-total" class="text-2xl font-bold text-emerald-400">₹18,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OPERATIONS TAB -->
+        <div id="content-operations" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="glass-panel rounded-2xl p-6">
+                    <h3 class="text-xl font-bold mb-6 text-orange-400">Operations Calculator</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-sm text-slate-400">Queries: <span id="ops-queries-val" class="text-orange-400 font-bold">150</span></label>
+                            <input type="range" id="ops-queries" min="0" max="500" value="150" class="input-slider" oninput="updateOps()">
+                        </div>
+                        <div>
+                            <label class="text-sm text-slate-400">Resolution %: <span id="ops-rate-val" class="text-emerald-400 font-bold">88</span>%</label>
+                            <input type="range" id="ops-rate" min="50" max="100" value="88" class="input-slider" oninput="updateOps()">
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-panel rounded-2xl p-6">
+                    <h3 class="text-xl font-bold mb-6 text-emerald-400">Earnings</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between p-3 bg-slate-800/50 rounded"><span>Team Pool</span><span id="ops-pool" class="font-bold text-orange-400">₹8,000</span></div>
+                        <div class="flex justify-between p-3 bg-slate-800/50 rounded"><span>Individual</span><span id="ops-ind" class="font-bold text-emerald-400">₹15,000</span></div>
+                        <div class="flex justify-between p-4 bg-emerald-900/30 rounded-lg border border-emerald-500/50">
+                            <span class="font-bold">Total</span>
+                            <span id="ops-total" class="text-2xl font-bold text-emerald-400">₹16,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OTHER TABS PLACEHOLDER -->
+        <div id="content-ticketing" class="tab-content hidden">
+            <div class="glass-panel rounded-2xl p-6">
+                <h3 class="text-xl font-bold text-emerald-400">Ticketing Calculator</h3>
+                <p class="text-slate-400 mt-4">Configure savings-based commission (20-25% of savings achieved)</p>
+            </div>
+        </div>
+        <div id="content-service" class="tab-content hidden">
+            <div class="glass-panel rounded-2xl p-6">
+                <h3 class="text-xl font-bold text-purple-400">Customer Service Calculator</h3>
+                <p class="text-slate-400 mt-4">₹500 per prevented complaint + review bonuses</p>
+            </div>
+        </div>
+        <div id="content-marketing" class="tab-content hidden">
+            <div class="glass-panel rounded-2xl p-6">
+                <h3 class="text-xl font-bold text-pink-400">Marketing Calculator</h3>
+                <p class="text-slate-400 mt-4">10-15% of ROI improvement</p>
+            </div>
+        </div>
+        <div id="content-leadership" class="tab-content hidden">
+            <div class="glass-panel rounded-2xl p-6">
+                <h3 class="text-xl font-bold text-indigo-400">Leadership Calculator</h3>
+                <p class="text-slate-400 mt-4">15% (TL) or 25% (Manager) override on team commissions</p>
+            </div>
+        </div>
+        <div id="content-overview" class="tab-content hidden">
+            <div class="glass-panel rounded-2xl p-6">
+                <h3 class="text-xl font-bold text-blue-400">Scheme Overview</h3>
+                <p class="text-slate-400 mt-4">Complete commission structure for all 697 staff members</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Staff data
+        const staffCounts = { sales: 42, operations: 285, ticketing: 48, service: 65, marketing: 18, leadership: 47, support: 192 };
+
+        // Tab switching
+        function showTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('content-' + tab).classList.remove('hidden');
+            document.querySelectorAll('nav button').forEach(el => {
+                el.classList.remove('tab-active');
+                el.classList.add('text-slate-400');
+            });
+            document.getElementById('tab-' + tab).classList.add('tab-active');
+            document.getElementById('tab-' + tab).classList.remove('text-slate-400');
+        }
+
+        // Company Calculator
+        function updateCompany() {
+            const dept = document.getElementById('comp-dept').value;
+            const destRate = parseInt(document.getElementById('comp-dest').value);
+            const bookings = parseInt(document.getElementById('comp-book').value);
+            const focus = parseInt(document.getElementById('comp-focus').value);
+            const achieve = parseFloat(document.getElementById('comp-achieve').value);
+
+            document.getElementById('comp-book-val').textContent = bookings;
+            document.getElementById('comp-focus-val').textContent = focus;
+
+            const staff = dept === 'all' ? 697 : staffCounts[dept];
+            const totalBookings = staff * bookings;
+            const focusBookings = Math.floor(totalBookings * focus / 100);
+            const stdBookings = totalBookings - focusBookings;
+
+            const stdComm = stdBookings * 500 * achieve;
+            const focusComm = focusBookings * destRate * achieve;
+            const leadership = (stdComm + focusComm) * 0.15;
+            const total = stdComm + focusComm + leadership;
+            const avg = total / staff;
+
+            document.getElementById('comp-staff').textContent = staff;
+            document.getElementById('comp-bookings').textContent = totalBookings.toLocaleString();
+            document.getElementById('comp-avg').textContent = '₹' + Math.floor(avg).toLocaleString();
+            document.getElementById('comp-total').textContent = '₹' + Math.floor(total).toLocaleString();
+            document.getElementById('comp-month').textContent = '₹' + Math.floor(total).toLocaleString();
+            document.getElementById('comp-year').textContent = '₹' + Math.floor(total * 12).toLocaleString();
+            document.getElementById('header-payout').textContent = '₹' + Math.floor(total).toLocaleString();
+
+            updateChart(stdComm, focusComm, leadership);
+        }
+
+        let chartInstance = null;
+        function updateChart(std, focus, lead) {
+            const ctx = document.getElementById('compChart');
+            if (!ctx) return;
+
+            if (chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Standard', 'Focus Dest', 'Leadership'],
+                    datasets: [{
+                        data: [std, focus, lead],
+                        backgroundColor: ['#3b82f6', '#a855f7', '#6366f1'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { position: 'right', labels: { color: '#94a3b8' } } }
+                }
+            });
+        }
+
+        // Sales Calculator
+        function updateSales() {
+            const bookings = parseInt(document.getElementById('sales-book').value);
+            const focus = parseInt(document.getElementById('sales-focus').value);
+            const tours = parseInt(document.getElementById('sales-tour').value);
+
+            document.getElementById('sales-book-val').textContent = bookings;
+            document.getElementById('sales-focus-val').textContent = focus;
+            document.getElementById('sales-tour-val').textContent = tours;
+
+            const focusCount = Math.floor(bookings * focus / 100);
+            const stdCount = bookings - focusCount;
+
+            const stdComm = stdCount * 500;
+            const focusComm = focusCount * 1500;
+            const tourComm = tours * 2000;
+            const total = stdComm + focusComm + tourComm;
+
+            document.getElementById('sales-std').textContent = '₹' + stdComm.toLocaleString();
+            document.getElementById('sales-focus-comm').textContent = '₹' + focusComm.toLocaleString();
+            document.getElementById('sales-tour-comm').textContent = '₹' + tourComm.toLocaleString();
+            document.getElementById('sales-total').textContent = '₹' + total.toLocaleString();
+        }
+
+        // Operations Calculator
+        function updateOps() {
+            const queries = parseInt(document.getElementById('ops-queries').value);
+            const rate = parseInt(document.getElementById('ops-rate').value);
+
+            document.getElementById('ops-queries-val').textContent = queries;
+            document.getElementById('ops-rate-val').textContent = rate;
+
+            let pool = rate >= 95 ? 15000 : rate >= 90 ? 12000 : rate >= 80 ? 8000 : 4000;
+            const share = pool / 8;
+            const ind = queries * 100;
+            const total = share + ind;
+
+            document.getElementById('ops-pool').textContent = '₹' + pool.toLocaleString();
+            document.getElementById('ops-ind').textContent = '₹' + ind.toLocaleString();
+            document.getElementById('ops-total').textContent = '₹' + Math.floor(total).toLocaleString();
+        }
+
+        // Initialize
+        updateCompany();
+        updateSales();
+        updateOps();
+    </script>
+</body>
+</html>
