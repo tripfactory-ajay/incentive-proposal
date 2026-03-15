@@ -1,471 +1,1403 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TripFactory Incentive Commission Scheme 2026</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #e2e8f0; }
-        .gradient-text { background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass-panel { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(148, 163, 184, 0.1); }
-        .input-slider { -webkit-appearance: none; width: 100%; height: 8px; border-radius: 4px; background: #334155; outline: none; }
-        .input-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #60a5fa; cursor: pointer; border: 2px solid #1e293b; }
-        .tab-active { border-bottom: 3px solid #60a5fa; color: #60a5fa; }
-        .explanation-card { border-left: 4px solid #60a5fa; }
-    </style>
-<base target="_blank">
-</head>
-<body class="min-h-screen">
-    <!-- Header -->
-    <header class="glass-panel sticky top-0 z-50 border-b border-slate-700">
-        <div class="max-w-7xl mx-auto px-4 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">TF</div>
-                    <div>
-                        <h1 class="text-2xl font-bold gradient-text">Incentive Commission Scheme 2026</h1>
-                        <p class="text-sm text-slate-400">Complete Staff: <span class="text-emerald-400 font-bold">697 employees</span></p>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <div class="text-sm text-slate-400">Total Monthly Payout</div>
-                    <div id="header-payout" class="text-xl font-bold text-emerald-400">₹0</div>
-                </div>
-            </div>
-        </div>
-    </header>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TripFactory — Incentive & Commission Scheme 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --surface2: #1a2236;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8edf5;
+    --muted: #6b7a99;
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --green: #10b981;
+    --amber: #f59e0b;
+    --red: #ef4444;
+    --teal: #14b8a6;
+    --pink: #ec4899;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1040 50%, #0f172a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .logo-mark {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px; color: white; letter-spacing: -0.5px;
+  }
+  .logo-text h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+  .logo-text p { font-size: 12px; color: var(--muted); margin-top: 1px; }
+  .header-badge {
+    background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25);
+    color: var(--green); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+  }
 
-    <!-- Navigation -->
-    <div class="glass-panel border-b border-slate-700">
-        <div class="max-w-7xl mx-auto px-4">
-            <nav class="flex gap-4 overflow-x-auto text-sm">
-                <button onclick="showTab('explanation')" id="tab-explanation" class="tab-active py-4 px-2 font-medium whitespace-nowrap">📋 Explanation</button>
-                <button onclick="showTab('overview')" id="tab-overview" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">📊 Overview</button>
-                <button onclick="showTab('sales')" id="tab-sales" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">💰 Sales</button>
-                <button onclick="showTab('operations')" id="tab-operations" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">⚙️ Operations</button>
-                <button onclick="showTab('ticketing')" id="tab-ticketing" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">✈️ Ticketing</button>
-                <button onclick="showTab('service')" id="tab-service" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">🎧 Service</button>
-                <button onclick="showTab('marketing')" id="tab-marketing" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">📢 Marketing</button>
-                <button onclick="showTab('leadership')" id="tab-leadership" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">👑 Leadership</button>
-                <button onclick="showTab('company')" id="tab-company" class="py-4 px-2 font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap">🏢 Company Payout</button>
-            </nav>
-        </div>
+  /* ARREARS BANNER */
+  .arrears-banner {
+    background: linear-gradient(90deg, rgba(245,158,11,0.1), rgba(245,158,11,0.05));
+    border-bottom: 1px solid rgba(245,158,11,0.2);
+    padding: 10px 32px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: var(--amber);
+  }
+  .arrears-banner strong { font-weight: 600; }
+
+  /* TABS */
+  nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex; gap: 0; overflow-x: auto;
+  }
+  nav::-webkit-scrollbar { height: 0; }
+  .tab-btn {
+    padding: 16px 20px;
+    background: none; border: none; border-bottom: 3px solid transparent;
+    color: var(--muted); font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; white-space: nowrap; transition: all 0.2s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* LAYOUT */
+  main { max-width: 1200px; margin: 0 auto; padding: 32px; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px;
+  }
+  .card-sm { padding: 16px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media(max-width:768px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    main { padding: 16px; }
+    nav { padding: 0 16px; }
+    header { padding: 16px; }
+  }
+
+  /* SECTION HEADERS */
+  .section-title { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
+  .section-sub { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+  .card-title { font-size: 15px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+
+  /* TOOLTIP */
+  .tooltip-wrap { position: relative; display: inline-flex; align-items: center; }
+  .tooltip-icon {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.4);
+    color: var(--accent); font-size: 10px; font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: help; margin-left: 6px; flex-shrink: 0;
+  }
+  .tooltip-box {
+    position: absolute; left: 28px; top: -8px; z-index: 200;
+    background: #1e293b; border: 1px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px;
+    width: 260px; font-size: 12px; line-height: 1.6; color: var(--text);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    opacity: 0; pointer-events: none; transition: opacity 0.15s;
+  }
+  .tooltip-wrap:hover .tooltip-box { opacity: 1; }
+  .tooltip-box strong { color: var(--accent); display: block; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* SLIDERS */
+  .slider-wrap { margin-bottom: 20px; }
+  .slider-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 13px; color: var(--muted); }
+  .slider-val { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; color: var(--text); }
+  input[type=range] {
+    -webkit-appearance: none; width: 100%; height: 6px;
+    border-radius: 3px; background: var(--surface2); outline: none; cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg); cursor: pointer;
+  }
+  select {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text); padding: 10px 12px; border-radius: 8px; font-size: 13px;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; outline: none;
+    margin-bottom: 16px;
+  }
+  select:focus { border-color: var(--accent); }
+  label.field-label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 6px; }
+
+  /* STAT BOXES */
+  .stat-box { background: var(--surface2); border-radius: 12px; padding: 16px; text-align: center; }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .stat-val { font-size: 22px; font-weight: 700; font-family: 'DM Mono', monospace; }
+  .stat-val.green { color: var(--green); }
+  .stat-val.blue { color: var(--accent); }
+  .stat-val.purple { color: var(--accent2); }
+  .stat-val.amber { color: var(--amber); }
+
+  /* EARNINGS ROWS */
+  .earn-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 14px; background: var(--surface2); border-radius: 8px; margin-bottom: 8px;
+    font-size: 14px;
+  }
+  .earn-row .earn-label { color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  .earn-row .earn-val { font-weight: 600; font-family: 'DM Mono', monospace; }
+  .earn-row.total-row {
+    background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2);
+    padding: 16px 14px; margin-top: 12px;
+  }
+  .earn-row.total-row .earn-label { color: var(--text); font-weight: 600; font-size: 15px; }
+  .earn-row.total-row .earn-val { font-size: 22px; color: var(--green); }
+
+  /* THRESHOLD INDICATORS */
+  .threshold { 
+    padding: 10px 14px; border-radius: 8px; font-size: 12px; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .threshold.met { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2); color: var(--green); }
+  .threshold.unmet { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: var(--red); }
+  .threshold.warn { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); color: var(--amber); }
+
+  /* INCENTIVE RULE CARDS */
+  .rule-card {
+    border-left: 3px solid var(--accent); background: var(--surface2);
+    border-radius: 0 10px 10px 0; padding: 14px 16px; margin-bottom: 12px;
+  }
+  .rule-card.green { border-left-color: var(--green); }
+  .rule-card.purple { border-left-color: var(--accent2); }
+  .rule-card.amber { border-left-color: var(--amber); }
+  .rule-card.teal { border-left-color: var(--teal); }
+  .rule-card.pink { border-left-color: var(--pink); }
+  .rule-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+  .rule-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* OVERVIEW TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; padding: 10px 14px; color: var(--muted); font-weight: 500; border-bottom: 1px solid var(--border); }
+  td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* PROGRESS BAR */
+  .progress-wrap { background: var(--surface2); border-radius: 4px; height: 8px; margin-top: 6px; overflow: hidden; }
+  .progress-bar { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+
+  /* NEXUS NOTE */
+  .nexus-note {
+    background: rgba(20,184,166,0.08); border: 1px solid rgba(20,184,166,0.2);
+    border-radius: 10px; padding: 12px 16px; margin-top: 20px;
+    font-size: 12px; color: var(--teal); display: flex; align-items: center; gap: 10px;
+  }
+
+  /* DEPT BADGE */
+  .dept-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+
+  /* CHART CONTAINER */
+  .chart-container { position: relative; height: 200px; margin-top: 16px; }
+
+  /* SPACING */
+  .mb-4 { margin-bottom: 16px; }
+  .mb-6 { margin-bottom: 24px; }
+  .mt-4 { margin-top: 16px; }
+  .gap-4 { gap: 16px; }
+
+  /* PAYOUT MONTH BADGE */
+  .payout-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.25);
+    color: var(--amber); padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  /* DEST BUTTON GROUP */
+  .dest-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .dest-btn {
+    padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--surface2); color: var(--muted); font-size: 12px; font-weight: 500;
+    cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif;
+  }
+  .dest-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .dest-btn.active { background: rgba(59,130,246,0.15); border-color: var(--accent); color: var(--accent); }
+
+  /* TIER TABLE */
+  .tier-table { width: 100%; font-size: 12px; margin-top: 12px; }
+  .tier-table th { background: var(--surface2); padding: 8px 12px; font-weight: 600; color: var(--muted); }
+  .tier-table td { padding: 8px 12px; }
+  .tier-table tr.highlight td { background: rgba(16,185,129,0.07); color: var(--green); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-mark">TF</div>
+    <div class="logo-text">
+      <h1>TripFactory — Incentive & Commission Scheme 2026</h1>
+      <p>697 staff · All departments · Paid 1 month in arrears on 5th</p>
+    </div>
+  </div>
+  <div class="header-badge">📊 Live Calculator</div>
+</header>
+
+<!-- ARREARS BANNER -->
+<div class="arrears-banner">
+  ⏱️ <span><strong>All incentives are paid 1 month in arrears</strong> — commissions earned in Month X are paid on the 5th of Month X+1 &nbsp;·&nbsp; Tracked via <strong>Nexus DMC Reservation System</strong></span>
+</div>
+
+<!-- TABS -->
+<nav>
+  <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
+  <button class="tab-btn" onclick="showTab('sales')">💰 Sales</button>
+  <button class="tab-btn" onclick="showTab('operations')">⚙️ Operations</button>
+  <button class="tab-btn" onclick="showTab('ticketing')">✈️ Ticketing</button>
+  <button class="tab-btn" onclick="showTab('service')">🎧 Customer Service</button>
+  <button class="tab-btn" onclick="showTab('marketing')">📢 Marketing</button>
+  <button class="tab-btn" onclick="showTab('leadership')">👑 Leadership</button>
+  <button class="tab-btn" onclick="showTab('company')">🏢 Company Payout</button>
+</nav>
+
+<main>
+
+<!-- ============================
+     OVERVIEW TAB
+============================= -->
+<div id="tab-overview" class="tab-content active">
+  <div class="section-title">Commission Scheme — At a Glance</div>
+  <div class="section-sub">Full breakdown of all incentive types across 697 staff. Hover the ⓘ icons for plain-English explanations.</div>
+
+  <div class="card mb-6">
+    <div class="card-title">🏢 Department Summary</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Department</th>
+          <th>Staff</th>
+          <th>How They Earn</th>
+          <th>Minimum to Qualify</th>
+          <th>Max Monthly Potential</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span style="color:#3b82f6;font-weight:600;">💰 Sales</span></td>
+          <td>42</td>
+          <td>Per booking + destination bonus + fixed tour bonus</td>
+          <td>12 bookings/month</td>
+          <td style="color:var(--green);font-weight:600;">£1,200+</td>
+        </tr>
+        <tr>
+          <td><span style="color:#f59e0b;font-weight:600;">⚙️ Operations</span></td>
+          <td>285</td>
+          <td>Team resolution pool + per-query bonus</td>
+          <td>80% query resolution rate</td>
+          <td style="color:var(--green);font-weight:600;">£400+</td>
+        </tr>
+        <tr>
+          <td><span style="color:#10b981;font-weight:600;">✈️ Ticketing</span></td>
+          <td>48</td>
+          <td>% of cost savings achieved vs benchmark</td>
+          <td>£500 savings/month</td>
+          <td style="color:var(--green);font-weight:600;">£600+</td>
+        </tr>
+        <tr>
+          <td><span style="color:#8b5cf6;font-weight:600;">🎧 Customer Service</span></td>
+          <td>65</td>
+          <td>Per prevented complaint + CSAT bonus</td>
+          <td>&lt;5% complaint rate</td>
+          <td style="color:var(--green);font-weight:600;">£500+</td>
+        </tr>
+        <tr>
+          <td><span style="color:#ec4899;font-weight:600;">📢 Marketing</span></td>
+          <td>18</td>
+          <td>% of ROI improvement above baseline</td>
+          <td>15% ROI improvement</td>
+          <td style="color:var(--green);font-weight:600;">£800+</td>
+        </tr>
+        <tr>
+          <td><span style="color:#6366f1;font-weight:600;">👑 Team Leaders</span></td>
+          <td>35</td>
+          <td>15% override on team's total commission</td>
+          <td>Team hits 80% of target</td>
+          <td style="color:var(--green);font-weight:600;">£900+</td>
+        </tr>
+        <tr>
+          <td><span style="color:#f43f5e;font-weight:600;">👑 Managers</span></td>
+          <td>12</td>
+          <td>25% override on department commission</td>
+          <td>Dept hits 85% of target</td>
+          <td style="color:var(--green);font-weight:600;">£2,000+</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--muted);font-weight:600;">🏢 Support</span></td>
+          <td>192</td>
+          <td>Company performance bonus pool</td>
+          <td>Company hits overall target</td>
+          <td style="color:var(--green);font-weight:600;">£200+</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-3 mb-6">
+    <div class="card">
+      <div class="card-title">📌 How It Works</div>
+      <div class="rule-card">
+        <div class="rule-title">Step 1 — Hit the minimum</div>
+        <div class="rule-desc">Every department has a qualifying threshold. No commission is earned below this level.</div>
+      </div>
+      <div class="rule-card green">
+        <div class="rule-title">Step 2 — Earn base commission</div>
+        <div class="rule-desc">Standard rates apply once threshold is met. These are fixed per booking/query/saving.</div>
+      </div>
+      <div class="rule-card purple">
+        <div class="rule-title">Step 3 — Accelerate</div>
+        <div class="rule-desc">Stretch goals unlock higher rates and multipliers. Destination bonuses stack on top.</div>
+      </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="card">
+      <div class="card-title">⚠️ Key Rules</div>
+      <div class="rule-card amber">
+        <div class="rule-title">Cancellation Rate</div>
+        <div class="rule-desc">Sales must maintain &lt;5% cancellation rate. Excess cancellations reduce qualifying booking count.</div>
+      </div>
+      <div class="rule-card amber">
+        <div class="rule-title">Team Leader Override</div>
+        <div class="rule-desc">TLs only earn their 15% override if their team achieves at least 80% of monthly target.</div>
+      </div>
+      <div class="rule-card amber">
+        <div class="rule-title">Payment Date</div>
+        <div class="rule-desc">All commissions paid on the 5th of the following month. One month in arrears always.</div>
+      </div>
+    </div>
 
-        <!-- EXPLANATION TAB -->
-        <div id="content-explanation" class="tab-content">
-            <div class="mb-8">
-                <h2 class="text-3xl font-bold mb-2 gradient-text">Commission Scheme Explanation</h2>
-                <p class="text-slate-400">Complete guide for management review and staff presentation</p>
-            </div>
+    <div class="card">
+      <div class="card-title">📡 Tracking System</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px;">
+        All performance data is tracked and verified through the <strong style="color:var(--teal);">Nexus DMC Reservation System</strong>. 
+        Commission calculations are based solely on data recorded in Nexus — no manual submissions are accepted.
+      </div>
+      <div class="rule-card teal">
+        <div class="rule-title">What Nexus Tracks</div>
+        <div class="rule-desc">Bookings, cancellations, destination codes, query resolution, cost savings, tour confirmations, and client satisfaction scores.</div>
+      </div>
+      <div class="rule-card teal">
+        <div class="rule-title">Disputes</div>
+        <div class="rule-desc">Any commission queries must be raised with your line manager by the 20th of the following month.</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-            <div class="glass-panel rounded-2xl p-6 mb-6 explanation-card">
-                <h3 class="text-xl font-bold mb-4 text-blue-400">🎯 Executive Summary</h3>
-                <p class="text-slate-300 mb-4">This incentive scheme aligns all <strong>697 staff members</strong> across 8 departments toward common company goals. Every employee can earn additional income based on performance.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="p-4 bg-slate-800/50 rounded-xl">
-                        <div class="text-2xl font-bold text-emerald-400">₹50K-2L</div>
-                        <div class="text-sm text-slate-400">Potential monthly commission</div>
-                    </div>
-                    <div class="p-4 bg-slate-800/50 rounded-xl">
-                        <div class="text-2xl font-bold text-blue-400">12-25</div>
-                        <div class="text-sm text-slate-400">Minimum targets</div>
-                    </div>
-                    <div class="p-4 bg-slate-800/50 rounded-xl">
-                        <div class="text-2xl font-bold text-purple-400">1.5x-2x</div>
-                        <div class="text-sm text-slate-400">Accelerator multipliers</div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                <div class="glass-panel rounded-2xl p-6">
-                    <h3 class="text-lg font-bold mb-4 text-emerald-400">✅ How It Works</h3>
-                    <div class="space-y-4">
-                        <div class="flex gap-4">
-                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold text-sm shrink-0">1</div>
-                            <div>
-                                <div class="font-semibold">Meet Minimum Target</div>
-                                <div class="text-sm text-slate-400">Each department has a threshold (e.g., Sales: 12 bookings)</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold text-sm shrink-0">2</div>
-                            <div>
-                                <div class="font-semibold">Earn Base Commission</div>
-                                <div class="text-sm text-slate-400">Standard rates apply once target is met</div>
-                            </div>
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center font-bold text-sm shrink-0">3</div>
-                            <div>
-                                <div class="font-semibold">Accelerate</div>
-                                <div class="text-sm text-slate-400">Hit stretch goals for multipliers</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- ============================
+     SALES TAB
+============================= -->
+<div id="tab-sales" class="tab-content">
+  <div class="section-title">💰 Sales Commission Calculator</div>
+  <div class="section-sub">Adjust your monthly figures below to see your estimated commission. All amounts paid 1 month in arrears.</div>
+  <div class="payout-badge">⏱️ Paid on 5th of following month · Tracked via Nexus</div>
 
-                <div class="glass-panel rounded-2xl p-6">
-                    <h3 class="text-lg font-bold mb-4 text-amber-400">⚠️ Important Rules</h3>
-                    <div class="space-y-2 text-sm">
-                        <div class="flex items-start gap-2">
-                            <span class="text-rose-400">•</span>
-                            <span>No accelerators unless minimum targets met</span>
-                        </div>
-                        <div class="flex items-start gap-2">
-                            <span class="text-rose-400">•</span>
-                            <span>Sales must have &lt;5% cancellation rate</span>
-                        </div>
-                        <div class="flex items-start gap-2">
-                            <span class="text-rose-400">•</span>
-                            <span>TLs earn override only if team hits 80%</span>
-                        </div>
-                        <div class="flex items-start gap-2">
-                            <span class="text-rose-400">•</span>
-                            <span>Commissions paid on 5th of following month</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="glass-panel rounded-2xl p-6">
-                <h3 class="text-lg font-bold mb-4 text-purple-400">🏢 Department Breakdown (697 Total Staff)</h3>
-                <table class="w-full text-sm">
-                    <thead class="text-slate-400 border-b border-slate-700">
-                        <tr>
-                            <th class="text-left py-3">Department</th>
-                            <th class="text-center py-3">Count</th>
-                            <th class="text-left py-3">Commission Type</th>
-                            <th class="text-left py-3">Min Target</th>
-                            <th class="text-left py-3">Max Potential</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-800">
-                        <tr><td class="py-3 text-blue-400">Sales</td><td class="text-center">42</td><td>Per booking + Focus dest</td><td>12 bookings</td><td class="text-emerald-400">₹75K/mo</td></tr>
-                        <tr><td class="py-3 text-orange-400">Operations</td><td class="text-center">285</td><td>Team pool + Per query</td><td>80% resolution</td><td class="text-emerald-400">₹25K/mo</td></tr>
-                        <tr><td class="py-3 text-emerald-400">Ticketing</td><td class="text-center">48</td><td>% of savings</td><td>₹50K savings</td><td class="text-emerald-400">₹40K/mo</td></tr>
-                        <tr><td class="py-3 text-purple-400">Customer Service</td><td class="text-center">65</td><td>Per prevented complaint</td><td>&lt;5% complaints</td><td class="text-emerald-400">₹1L/mo</td></tr>
-                        <tr><td class="py-3 text-pink-400">Marketing</td><td class="text-center">18</td><td>% of ROI gain</td><td>15% improvement</td><td class="text-emerald-400">₹50K/mo</td></tr>
-                        <tr><td class="py-3 text-indigo-400">Team Leaders</td><td class="text-center">35</td><td>15% team override</td><td>Team 80%</td><td class="text-emerald-400">₹60K/mo</td></tr>
-                        <tr><td class="py-3 text-rose-400">Management</td><td class="text-center">12</td><td>25% dept override</td><td>Dept 85%</td><td class="text-emerald-400">₹1.5L/mo</td></tr>
-                        <tr><td class="py-3 text-slate-400">Support</td><td class="text-center">192</td><td>Company bonus</td><td>Company target</td><td class="text-emerald-400">₹15K/mo</td></tr>
-                    </tbody>
-                </table>
-            </div>
+  <div class="grid-2">
+    <!-- LEFT: INPUTS -->
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">
+          ⚙️ Your Monthly Activity
+          <div class="tooltip-wrap">
+            <span class="tooltip-icon">?</span>
+            <div class="tooltip-box"><strong>How Sales Commission Works</strong>Enter your bookings for the month. You must hit 12 bookings minimum to qualify. Then choose which destination type applies to your bookings for the bonus calculation. Commission is per confirmed booking only — cancelled bookings don't count.</div>
+          </div>
         </div>
 
-        <!-- COMPANY PAYOUT TAB -->
-        <div id="content-company" class="tab-content hidden">
-            <div class="mb-6">
-                <h2 class="text-3xl font-bold mb-2 gradient-text">Company Payout Calculator</h2>
-                <p class="text-slate-400">Select staff, destinations, and volumes to calculate total liability</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="glass-panel rounded-2xl p-6">
-                    <h3 class="text-lg font-bold mb-4 text-blue-400">⚙️ Configuration</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm text-slate-400 mb-2">Department</label>
-                            <select id="comp-dept" class="w-full bg-slate-800 border border-slate-700 rounded p-2" onchange="updateCompany()">
-                                <option value="sales">Sales (42 staff)</option>
-                                <option value="operations">Operations (285)</option>
-                                <option value="ticketing">Ticketing (48)</option>
-                                <option value="service">Customer Service (65)</option>
-                                <option value="marketing">Marketing (18)</option>
-                                <option value="all">All Departments (697)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm text-slate-400 mb-2">Focus Destination</label>
-                            <select id="comp-dest" class="w-full bg-slate-800 border border-slate-700 rounded p-2" onchange="updateCompany()">
-                                <option value="500">Standard (₹500)</option>
-                                <option value="1500">Thailand/Dubai/SG (₹1,500)</option>
-                                <option value="2000">Turkey (₹2,000)</option>
-                                <option value="2500">Europe (₹2,500)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm text-slate-400 mb-2">Bookings/Person: <span id="comp-book-val" class="text-blue-400">15</span></label>
-                            <input type="range" id="comp-book" min="5" max="40" value="15" class="input-slider" oninput="updateCompany()">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-slate-400 mb-2">Focus %: <span id="comp-focus-val" class="text-purple-400">30</span>%</label>
-                            <input type="range" id="comp-focus" min="0" max="100" value="30" class="input-slider" oninput="updateCompany()">
-                        </div>
-                        <div>
-                            <label class="block text-sm text-slate-400 mb-2">Achievement</label>
-                            <select id="comp-achieve" class="w-full bg-slate-800 border border-slate-700 rounded p-2" onchange="updateCompany()">
-                                <option value="0.7">70% - Below Target</option>
-                                <option value="1.0" selected>100% - On Target</option>
-                                <option value="1.3">130% - Over</option>
-                                <option value="1.5">150% - High</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass-panel rounded-2xl p-6 lg:col-span-2">
-                    <h3 class="text-lg font-bold mb-4 text-emerald-400">💰 Payout Analysis</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                        <div class="p-4 bg-slate-800/50 rounded-xl text-center">
-                            <div class="text-sm text-slate-400">Staff</div>
-                            <div id="comp-staff" class="text-2xl font-bold text-blue-400">42</div>
-                        </div>
-                        <div class="p-4 bg-slate-800/50 rounded-xl text-center">
-                            <div class="text-sm text-slate-400">Bookings</div>
-                            <div id="comp-bookings" class="text-2xl font-bold text-purple-400">630</div>
-                        </div>
-                        <div class="p-4 bg-slate-800/50 rounded-xl text-center">
-                            <div class="text-sm text-slate-400">Avg/Person</div>
-                            <div id="comp-avg" class="text-2xl font-bold text-amber-400">₹18,750</div>
-                        </div>
-                        <div class="p-4 bg-emerald-900/30 rounded-xl text-center border border-emerald-500/30">
-                            <div class="text-sm text-emerald-400">Total</div>
-                            <div id="comp-total" class="text-2xl font-bold text-emerald-400">₹7,87,500</div>
-                        </div>
-                    </div>
-
-                    <canvas id="compChart" height="200"></canvas>
-
-                    <div class="grid grid-cols-2 gap-4 mt-6">
-                        <div class="p-4 bg-slate-800/50 rounded-xl">
-                            <div class="text-sm text-slate-400">Monthly Cost</div>
-                            <div id="comp-month" class="text-3xl font-bold text-white">₹7,87,500</div>
-                        </div>
-                        <div class="p-4 bg-slate-800/50 rounded-xl">
-                            <div class="text-sm text-slate-400">Annual Cost</div>
-                            <div id="comp-year" class="text-3xl font-bold text-emerald-400">₹94,50,000</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Total Bookings This Month</span>
+            <span class="slider-val" id="s-book-val">15</span>
+          </div>
+          <input type="range" id="s-book" min="0" max="50" value="15" oninput="calcSales()">
         </div>
 
-        <!-- SALES TAB -->
-        <div id="content-sales" class="tab-content hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="glass-panel rounded-2xl p-6">
-                    <h3 class="text-xl font-bold mb-6 text-blue-400">Sales Calculator</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="text-sm text-slate-400">Bookings: <span id="sales-book-val" class="text-blue-400 font-bold">15</span></label>
-                            <input type="range" id="sales-book" min="0" max="50" value="15" class="input-slider" oninput="updateSales()">
-                        </div>
-                        <div>
-                            <label class="text-sm text-slate-400">Focus %: <span id="sales-focus-val" class="text-purple-400 font-bold">30</span>%</label>
-                            <input type="range" id="sales-focus" min="0" max="100" value="30" class="input-slider" oninput="updateSales()">
-                        </div>
-                        <div>
-                            <label class="text-sm text-slate-400">Fixed Tours: <span id="sales-tour-val" class="text-amber-400 font-bold">3</span></label>
-                            <input type="range" id="sales-tour" min="0" max="20" value="3" class="input-slider" oninput="updateSales()">
-                        </div>
-                    </div>
-                </div>
-                <div class="glass-panel rounded-2xl p-6">
-                    <h3 class="text-xl font-bold mb-6 text-emerald-400">Earnings</h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between p-3 bg-slate-800/50 rounded"><span>Standard</span><span id="sales-std" class="font-bold">₹5,250</span></div>
-                        <div class="flex justify-between p-3 bg-slate-800/50 rounded"><span>Focus</span><span id="sales-focus-comm" class="font-bold text-purple-400">₹6,750</span></div>
-                        <div class="flex justify-between p-3 bg-slate-800/50 rounded"><span>Tours</span><span id="sales-tour-comm" class="font-bold text-amber-400">₹6,000</span></div>
-                        <div class="flex justify-between p-4 bg-emerald-900/30 rounded-lg border border-emerald-500/50">
-                            <span class="font-bold">Total</span>
-                            <span id="sales-total" class="text-2xl font-bold text-emerald-400">₹18,000</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>of which are Focus Destination bookings</span>
+            <span class="slider-val" id="s-focus-val">5</span>
+          </div>
+          <input type="range" id="s-focus" min="0" max="50" value="5" oninput="calcSales()">
         </div>
 
-        <!-- OPERATIONS TAB -->
-        <div id="content-operations" class="tab-content hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="glass-panel rounded-2xl p-6">
-                    <h3 class="text-xl font-bold mb-6 text-orange-400">Operations Calculator</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="text-sm text-slate-400">Queries: <span id="ops-queries-val" class="text-orange-400 font-bold">150</span></label>
-                            <input type="range" id="ops-queries" min="0" max="500" value="150" class="input-slider" oninput="updateOps()">
-                        </div>
-                        <div>
-                            <label class="text-sm text-slate-400">Resolution %: <span id="ops-rate-val" class="text-emerald-400 font-bold">88</span>%</label>
-                            <input type="range" id="ops-rate" min="50" max="100" value="88" class="input-slider" oninput="updateOps()">
-                        </div>
-                    </div>
-                </div>
-                <div class="glass-panel rounded-2xl p-6">
-                    <h3 class="text-xl font-bold mb-6 text-emerald-400">Earnings</h3>
-                    <div class="space-y-3">
-                        <div class="flex justify-between p-3 bg-slate-800/50 rounded"><span>Team Pool</span><span id="ops-pool" class="font-bold text-orange-400">₹8,000</span></div>
-                        <div class="flex justify-between p-3 bg-slate-800/50 rounded"><span>Individual</span><span id="ops-ind" class="font-bold text-emerald-400">₹15,000</span></div>
-                        <div class="flex justify-between p-4 bg-emerald-900/30 rounded-lg border border-emerald-500/50">
-                            <span class="font-bold">Total</span>
-                            <span id="ops-total" class="text-2xl font-bold text-emerald-400">₹16,000</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Fixed Departure Tours sold
+            <div class="tooltip-wrap" style="display:inline-flex;">
+              <span class="tooltip-icon">?</span>
+              <div class="tooltip-box"><strong>Fixed Departure Tours</strong>These are pre-set group departure tours. Each one sold earns a higher flat bonus on top of standard booking commission. These must be confirmed and non-cancelled to qualify.</div>
+            </div></span>
+            <span class="slider-val" id="s-tour-val">2</span>
+          </div>
+          <input type="range" id="s-tour" min="0" max="15" value="2" oninput="calcSales()">
         </div>
 
-        <!-- OTHER TABS PLACEHOLDER -->
-        <div id="content-ticketing" class="tab-content hidden">
-            <div class="glass-panel rounded-2xl p-6">
-                <h3 class="text-xl font-bold text-emerald-400">Ticketing Calculator</h3>
-                <p class="text-slate-400 mt-4">Configure savings-based commission (20-25% of savings achieved)</p>
-            </div>
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Cancellations this month</span>
+            <span class="slider-val" id="s-cancel-val">0</span>
+          </div>
+          <input type="range" id="s-cancel" min="0" max="15" value="0" oninput="calcSales()">
         </div>
-        <div id="content-service" class="tab-content hidden">
-            <div class="glass-panel rounded-2xl p-6">
-                <h3 class="text-xl font-bold text-purple-400">Customer Service Calculator</h3>
-                <p class="text-slate-400 mt-4">₹500 per prevented complaint + review bonuses</p>
-            </div>
-        </div>
-        <div id="content-marketing" class="tab-content hidden">
-            <div class="glass-panel rounded-2xl p-6">
-                <h3 class="text-xl font-bold text-pink-400">Marketing Calculator</h3>
-                <p class="text-slate-400 mt-4">10-15% of ROI improvement</p>
-            </div>
-        </div>
-        <div id="content-leadership" class="tab-content hidden">
-            <div class="glass-panel rounded-2xl p-6">
-                <h3 class="text-xl font-bold text-indigo-400">Leadership Calculator</h3>
-                <p class="text-slate-400 mt-4">15% (TL) or 25% (Manager) override on team commissions</p>
-            </div>
-        </div>
-        <div id="content-overview" class="tab-content hidden">
-            <div class="glass-panel rounded-2xl p-6">
-                <h3 class="text-xl font-bold text-blue-400">Scheme Overview</h3>
-                <p class="text-slate-400 mt-4">Complete commission structure for all 697 staff members</p>
-            </div>
-        </div>
-    </main>
+      </div>
 
-    <script>
-        // Staff data
-        const staffCounts = { sales: 42, operations: 285, ticketing: 48, service: 65, marketing: 18, leadership: 47, support: 192 };
+      <div class="card">
+        <div class="card-title">
+          🌍 Focus Destination Bonus Rate
+          <div class="tooltip-wrap">
+            <span class="tooltip-icon">?</span>
+            <div class="tooltip-box"><strong>Destination-Led Bonus</strong>TripFactory runs quarterly focus destinations. Bookings to these destinations earn a higher per-booking rate on top of the standard commission. The current focus destinations and rates are set by the Sales Director each quarter.</div>
+          </div>
+        </div>
+        <div class="dest-group" id="dest-group">
+          <button class="dest-btn" onclick="setDest(8,'Standard')">Standard — £8</button>
+          <button class="dest-btn active" onclick="setDest(25,'Thailand / Dubai / Singapore')">Thailand / Dubai / SG — £25</button>
+          <button class="dest-btn" onclick="setDest(35,'Turkey')">Turkey — £35</button>
+          <button class="dest-btn" onclick="setDest(45,'Europe')">Europe — £45</button>
+          <button class="dest-btn" onclick="setDest(60,'Long Haul')">Long Haul — £60</button>
+        </div>
+        <div id="dest-label" style="font-size:12px;color:var(--muted);">Selected: <strong style="color:var(--accent);">Thailand / Dubai / Singapore — £25/booking</strong></div>
+      </div>
+    </div>
 
-        // Tab switching
-        function showTab(tab) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('content-' + tab).classList.remove('hidden');
-            document.querySelectorAll('nav button').forEach(el => {
-                el.classList.remove('tab-active');
-                el.classList.add('text-slate-400');
-            });
-            document.getElementById('tab-' + tab).classList.add('tab-active');
-            document.getElementById('tab-' + tab).classList.remove('text-slate-400');
+    <!-- RIGHT: RESULTS -->
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">✅ Qualification Check</div>
+        <div id="s-qual-check"></div>
+        <div id="s-cancel-check"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💷 Your Estimated Commission</div>
+        <div class="earn-row">
+          <span class="earn-label">
+            Standard bookings (£8/booking)
+            <div class="tooltip-wrap"><span class="tooltip-icon">?</span><div class="tooltip-box"><strong>Standard Rate</strong>All non-focus-destination bookings earn £8 each. This is the base rate that applies once you've hit your 12 booking minimum.</div></div>
+          </span>
+          <span class="earn-val" id="s-std-earn">£0</span>
+        </div>
+        <div class="earn-row">
+          <span class="earn-label">
+            Focus destination bookings
+            <div class="tooltip-wrap"><span class="tooltip-icon">?</span><div class="tooltip-box"><strong>Focus Destination Bonus</strong>Bookings to the selected focus destination earn the higher per-booking rate shown in the destination selector. This replaces (not adds to) the standard rate for those bookings.</div></div>
+          </span>
+          <span class="earn-val" id="s-focus-earn" style="color:var(--accent2);">£0</span>
+        </div>
+        <div class="earn-row">
+          <span class="earn-label">
+            Fixed departure tours (£80/tour)
+            <div class="tooltip-wrap"><span class="tooltip-icon">?</span><div class="tooltip-box"><strong>Fixed Tour Bonus</strong>Each confirmed fixed departure tour earns a flat £80 bonus on top of any booking commission. Paid separately and in addition to your standard/focus commission.</div></div>
+          </span>
+          <span class="earn-val" id="s-tour-earn" style="color:var(--amber);">£0</span>
+        </div>
+        <div class="earn-row total-row">
+          <span class="earn-label">Total Commission (this month)</span>
+          <span class="earn-val" id="s-total">£0</span>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:12px;">
+          Paid on 5th <span id="s-payout-month">—</span>. Subject to &lt;5% cancellation rule.
+        </div>
+      </div>
+
+      <div class="card mt-4">
+        <div class="card-title">📈 Tier Guide</div>
+        <table class="tier-table">
+          <thead><tr><th>Bookings</th><th>Level</th><th>Accelerator</th></tr></thead>
+          <tbody>
+            <tr><td>0–11</td><td style="color:var(--red);">Below minimum</td><td>No commission</td></tr>
+            <tr id="tier-row-1"><td>12–19</td><td style="color:var(--amber);">On track</td><td>Standard rates</td></tr>
+            <tr id="tier-row-2"><td>20–29</td><td style="color:var(--green);">Strong</td><td>+10% on all</td></tr>
+            <tr id="tier-row-3"><td>30+</td><td style="color:#a78bfa;">Exceptional</td><td>+25% on all</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="nexus-note">
+    📡 <span>Booking data sourced from <strong>Nexus DMC Reservation System</strong>. Only confirmed, non-cancelled bookings recorded in Nexus before month-end count toward commission.</span>
+  </div>
+</div>
+
+
+<!-- ============================
+     OPERATIONS TAB
+============================= -->
+<div id="tab-operations" class="tab-content">
+  <div class="section-title">⚙️ Operations Commission Calculator</div>
+  <div class="section-sub">Operations earns via a shared team pool (based on resolution rate) plus an individual per-query bonus.</div>
+  <div class="payout-badge">⏱️ Paid on 5th of following month · Tracked via Nexus</div>
+
+  <div class="grid-2">
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">
+          ⚙️ Your Monthly Figures
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Queries handled this month
+            <div class="tooltip-wrap" style="display:inline-flex;"><span class="tooltip-icon">?</span><div class="tooltip-box"><strong>Per-Query Bonus</strong>Each query you personally handle and resolve earns an individual bonus of £1.50. This is tracked individually in Nexus and paid on top of your team pool share.</div></div>
+            </span>
+            <span class="slider-val" id="o-q-val">150</span>
+          </div>
+          <input type="range" id="o-queries" min="0" max="500" value="150" oninput="calcOps()">
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Team resolution rate %
+            <div class="tooltip-wrap" style="display:inline-flex;"><span class="tooltip-icon">?</span><div class="tooltip-box"><strong>Team Resolution Pool</strong>Your whole team shares a monthly pool based on the team's overall query resolution rate. The better the team performs, the bigger the pool — and your share is equal per team member. Individual poor performance can bring the whole team's pool down.</div></div>
+            </span>
+            <span class="slider-val" id="o-rate-val">88</span>%
+          </div>
+          <input type="range" id="o-rate" min="50" max="100" value="88" oninput="calcOps()">
+        </div>
+
+        <div>
+          <label class="field-label">Team size (members sharing pool)</label>
+          <select id="o-team" onchange="calcOps()">
+            <option value="6">6 members</option>
+            <option value="8" selected>8 members</option>
+            <option value="10">10 members</option>
+            <option value="12">12 members</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🏆 Team Pool Tiers</div>
+        <table class="tier-table">
+          <thead><tr><th>Resolution Rate</th><th>Monthly Pool (whole team)</th></tr></thead>
+          <tbody>
+            <tr><td>Below 80%</td><td style="color:var(--red);">No pool — below threshold</td></tr>
+            <tr id="o-tier-1"><td>80–89%</td><td>£120 pool</td></tr>
+            <tr id="o-tier-2"><td>90–94%</td><td>£200 pool</td></tr>
+            <tr id="o-tier-3"><td>95%+</td><td>£280 pool</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">✅ Qualification Check</div>
+        <div id="o-qual-check"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💷 Your Estimated Commission</div>
+        <div class="earn-row">
+          <span class="earn-label">Team pool share (your portion)</span>
+          <span class="earn-val" id="o-pool-earn" style="color:var(--amber);">£0</span>
+        </div>
+        <div class="earn-row">
+          <span class="earn-label">Individual query bonus (£1.50 each)</span>
+          <span class="earn-val" id="o-ind-earn" style="color:var(--accent);">£0</span>
+        </div>
+        <div class="earn-row total-row">
+          <span class="earn-label">Total Commission (this month)</span>
+          <span class="earn-val" id="o-total">£0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nexus-note">
+    📡 <span>Query counts and resolution rates pulled from <strong>Nexus DMC</strong> on last day of each month. Team leader validates figures before submission.</span>
+  </div>
+</div>
+
+
+<!-- ============================
+     TICKETING TAB
+============================= -->
+<div id="tab-ticketing" class="tab-content">
+  <div class="section-title">✈️ Ticketing Commission Calculator</div>
+  <div class="section-sub">Ticketing earns commission based on the cost savings they achieve vs. the standard benchmark fare.</div>
+  <div class="payout-badge">⏱️ Paid on 5th of following month · Tracked via Nexus</div>
+
+  <div class="grid-2">
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">
+          ✈️ Your Monthly Savings
+          <div class="tooltip-wrap">
+            <span class="tooltip-icon">?</span>
+            <div class="tooltip-box"><strong>How Ticketing Commission Works</strong>For each booking, Nexus records the benchmark fare vs the fare you actually secured. The difference is your "saving". Once you exceed £500 total savings in a month, you earn 20% of all savings above that threshold. Above £2,000, the rate increases to 25%.</div>
+          </div>
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Total cost savings vs benchmark (£)</span>
+            <span class="slider-val">£<span id="t-save-val">1200</span></span>
+          </div>
+          <input type="range" id="t-savings" min="0" max="5000" step="50" value="1200" oninput="calcTicketing()">
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Number of tickets processed</span>
+            <span class="slider-val" id="t-tickets-val">45</span>
+          </div>
+          <input type="range" id="t-tickets" min="0" max="200" value="45" oninput="calcTicketing()">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📊 Commission Rate Tiers</div>
+        <table class="tier-table">
+          <thead><tr><th>Monthly Savings</th><th>Commission Rate</th></tr></thead>
+          <tbody>
+            <tr><td>Below £500</td><td style="color:var(--red);">0% — below threshold</td></tr>
+            <tr id="t-tier-1"><td>£500 – £2,000</td><td>20% of savings above £500</td></tr>
+            <tr id="t-tier-2"><td>£2,000+</td><td>25% of savings above £500</td></tr>
+          </tbody>
+        </table>
+        <div style="font-size:11px;color:var(--muted);margin-top:10px;">
+          Plus a £2 flat bonus per ticket processed above 30 in a month.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">✅ Qualification Check</div>
+        <div id="t-qual-check"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💷 Your Estimated Commission</div>
+        <div class="earn-row">
+          <span class="earn-label">
+            Savings commission
+            <div class="tooltip-wrap"><span class="tooltip-icon">?</span><div class="tooltip-box"><strong>Savings Commission</strong>Calculated on total savings minus the £500 threshold. Rate depends on total savings level. Benchmark fares are updated quarterly by the Finance team and visible in Nexus.</div></div>
+          </span>
+          <span class="earn-val" id="t-save-earn" style="color:var(--green);">£0</span>
+        </div>
+        <div class="earn-row">
+          <span class="earn-label">Volume bonus (tickets over 30)</span>
+          <span class="earn-val" id="t-vol-earn" style="color:var(--accent);">£0</span>
+        </div>
+        <div class="earn-row total-row">
+          <span class="earn-label">Total Commission (this month)</span>
+          <span class="earn-val" id="t-total">£0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nexus-note">
+    📡 <span>Benchmark fares and achieved fares logged in <strong>Nexus DMC</strong>. Savings are calculated automatically. Only fares where saving is &gt;£10 per ticket are included.</span>
+  </div>
+</div>
+
+
+<!-- ============================
+     CUSTOMER SERVICE TAB
+============================= -->
+<div id="tab-service" class="tab-content">
+  <div class="section-title">🎧 Customer Service Commission Calculator</div>
+  <div class="section-sub">Customer Service earns through complaint prevention and high satisfaction scores.</div>
+  <div class="payout-badge">⏱️ Paid on 5th of following month · Tracked via Nexus</div>
+
+  <div class="grid-2">
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">
+          🎧 Your Monthly Performance
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Total customer contacts handled</span>
+            <span class="slider-val" id="cs-contacts-val">200</span>
+          </div>
+          <input type="range" id="cs-contacts" min="10" max="500" value="200" oninput="calcService()">
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Complaints received
+            <div class="tooltip-wrap" style="display:inline-flex;"><span class="tooltip-icon">?</span><div class="tooltip-box"><strong>Complaint Rate Rule</strong>Your complaint rate must be below 5% to qualify. Rate = (complaints / contacts) × 100. If you handle 200 contacts, you can have at most 9 complaints to still qualify. Below 2% unlocks the enhanced bonus.</div></div>
+            </span>
+            <span class="slider-val" id="cs-complaints-val">4</span>
+          </div>
+          <input type="range" id="cs-complaints" min="0" max="30" value="4" oninput="calcService()">
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>CSAT score (%)
+            <div class="tooltip-wrap" style="display:inline-flex;"><span class="tooltip-icon">?</span><div class="tooltip-box"><strong>Customer Satisfaction Score</strong>CSAT is measured via post-contact surveys sent automatically by Nexus. Scores of 90%+ earn the top CSAT bonus tier. Minimum 20 survey responses required to qualify.</div></div>
+            </span>
+            <span class="slider-val" id="cs-csat-val">87</span>%
+          </div>
+          <input type="range" id="cs-csat" min="50" max="100" value="87" oninput="calcService()">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💎 CSAT Bonus Tiers</div>
+        <table class="tier-table">
+          <thead><tr><th>CSAT Score</th><th>Bonus</th></tr></thead>
+          <tbody>
+            <tr><td>Below 70%</td><td style="color:var(--red);">No bonus</td></tr>
+            <tr id="cs-tier-1"><td>70–79%</td><td>£30/month</td></tr>
+            <tr id="cs-tier-2"><td>80–89%</td><td>£60/month</td></tr>
+            <tr id="cs-tier-3"><td>90%+</td><td>£100/month</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">✅ Qualification Check</div>
+        <div id="cs-qual-check"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💷 Your Estimated Commission</div>
+        <div class="earn-row">
+          <span class="earn-label">
+            Complaint prevention bonus (£8/prevented)
+            <div class="tooltip-wrap"><span class="tooltip-icon">?</span><div class="tooltip-box"><strong>Complaint Prevention</strong>You earn £8 for every complaint below your expected rate. If your contact volume predicts 12 complaints but you only received 4, you've "prevented" 8 — earning £64. Only applies if overall rate stays below 5%.</div></div>
+          </span>
+          <span class="earn-val" id="cs-prevent-earn" style="color:var(--accent2);">£0</span>
+        </div>
+        <div class="earn-row">
+          <span class="earn-label">CSAT bonus</span>
+          <span class="earn-val" id="cs-csat-earn" style="color:var(--teal);">£0</span>
+        </div>
+        <div class="earn-row total-row">
+          <span class="earn-label">Total Commission (this month)</span>
+          <span class="earn-val" id="cs-total">£0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nexus-note">
+    📡 <span>Complaint data and CSAT scores sourced from <strong>Nexus DMC</strong> and the customer survey platform. Data locked on last day of each month.</span>
+  </div>
+</div>
+
+
+<!-- ============================
+     MARKETING TAB
+============================= -->
+<div id="tab-marketing" class="tab-content">
+  <div class="section-title">📢 Marketing Commission Calculator</div>
+  <div class="section-sub">Marketing earns commission based on measurable ROI improvement above baseline.</div>
+  <div class="payout-badge">⏱️ Paid on 5th of following month · Tracked via Nexus</div>
+
+  <div class="grid-2">
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">
+          📢 Campaign Performance
+          <div class="tooltip-wrap">
+            <span class="tooltip-icon">?</span>
+            <div class="tooltip-box"><strong>How Marketing Commission Works</strong>Marketing commission is based on the percentage improvement in campaign ROI vs. the previous 3-month average (the baseline). You must achieve at least 15% improvement to qualify. Above that, you earn 12% of the additional ROI value generated.</div>
+          </div>
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Baseline monthly ROI (£)</span>
+            <span class="slider-val">£<span id="mk-baseline-val">5000</span></span>
+          </div>
+          <input type="range" id="mk-baseline" min="1000" max="20000" step="500" value="5000" oninput="calcMarketing()">
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Actual ROI this month (£)</span>
+            <span class="slider-val">£<span id="mk-actual-val">6500</span></span>
+          </div>
+          <input type="range" id="mk-actual" min="1000" max="30000" step="500" value="6500" oninput="calcMarketing()">
+        </div>
+
+        <div>
+          <label class="field-label">Campaign type</label>
+          <select id="mk-type" onchange="calcMarketing()">
+            <option value="0.12">Standard campaign — 12% of uplift</option>
+            <option value="0.15">Focus destination campaign — 15% of uplift</option>
+            <option value="0.10">Brand / awareness campaign — 10% of uplift</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📊 ROI Improvement Tiers</div>
+        <table class="tier-table">
+          <thead><tr><th>ROI Improvement</th><th>Commission Rate</th></tr></thead>
+          <tbody>
+            <tr><td>Below 15%</td><td style="color:var(--red);">0% — below threshold</td></tr>
+            <tr id="mk-tier-1"><td>15–24%</td><td>Standard rate (12–15%)</td></tr>
+            <tr id="mk-tier-2"><td>25–49%</td><td>+1.5x multiplier on commission</td></tr>
+            <tr id="mk-tier-3"><td>50%+</td><td>+2x multiplier on commission</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">✅ Qualification Check</div>
+        <div id="mk-qual-check"></div>
+        <div style="margin-top:12px;">
+          <div class="stat-label">ROI Improvement</div>
+          <div id="mk-improvement" class="stat-val" style="font-size:32px;">—</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💷 Your Estimated Commission</div>
+        <div class="earn-row">
+          <span class="earn-label">ROI uplift commission</span>
+          <span class="earn-val" id="mk-comm-earn" style="color:var(--pink);">£0</span>
+        </div>
+        <div class="earn-row">
+          <span class="earn-label">Multiplier applied</span>
+          <span class="earn-val" id="mk-mult-val" style="color:var(--accent);">1.0x</span>
+        </div>
+        <div class="earn-row total-row">
+          <span class="earn-label">Total Commission (this month)</span>
+          <span class="earn-val" id="mk-total">£0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nexus-note">
+    📡 <span>Campaign ROI data is pulled from the marketing analytics dashboard and cross-referenced with <strong>Nexus DMC</strong> booking data. Finance validates final ROI figures monthly.</span>
+  </div>
+</div>
+
+
+<!-- ============================
+     LEADERSHIP TAB
+============================= -->
+<div id="tab-leadership" class="tab-content">
+  <div class="section-title">👑 Leadership Commission Calculator</div>
+  <div class="section-sub">Team Leaders and Managers earn an override percentage on their team or department's total commission.</div>
+  <div class="payout-badge">⏱️ Paid on 5th of following month · Tracked via Nexus</div>
+
+  <div class="grid-2">
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">
+          👑 Your Role & Team
+        </div>
+
+        <div>
+          <label class="field-label">Your role</label>
+          <select id="ldr-role" onchange="calcLeadership()">
+            <option value="0.15">Team Leader — 15% override</option>
+            <option value="0.25">Manager — 25% override</option>
+          </select>
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Team/dept total commission earned (£)
+            <div class="tooltip-wrap" style="display:inline-flex;"><span class="tooltip-icon">?</span><div class="tooltip-box"><strong>Override Commission</strong>Your override is calculated on the total commission earned by everyone in your team or department this month. The bigger and higher-performing your team, the more you earn. This incentivises you to coach and develop your people.</div></div>
+            </span>
+            <span class="slider-val">£<span id="ldr-team-val">2500</span></span>
+          </div>
+          <input type="range" id="ldr-team" min="0" max="20000" step="100" value="2500" oninput="calcLeadership()">
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-label">
+            <span>Team achievement vs target (%)</span>
+            <span class="slider-val" id="ldr-achieve-val">85</span>%
+          </div>
+          <input type="range" id="ldr-achieve" min="0" max="150" value="85" oninput="calcLeadership()">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📋 Leadership Rules</div>
+        <div class="rule-card purple">
+          <div class="rule-title">Team Leader — 15% Override</div>
+          <div class="rule-desc">Applies when team achieves ≥80% of monthly target. Calculated on total team commission. TLs can also earn their own individual incentive separately.</div>
+        </div>
+        <div class="rule-card pink">
+          <div class="rule-title">Manager — 25% Override</div>
+          <div class="rule-desc">Applies when department achieves ≥85% of monthly target. Calculated on total department commission. Managers do not earn individual incentives separately.</div>
+        </div>
+        <div class="rule-card amber">
+          <div class="rule-title">Threshold Rule</div>
+          <div class="rule-desc">Override is ALL OR NOTHING — if the threshold isn't met, zero override is paid. No partial override for near-miss performance.</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card mb-4">
+        <div class="card-title">✅ Qualification Check</div>
+        <div id="ldr-qual-check"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💷 Your Estimated Commission</div>
+        <div class="earn-row">
+          <span class="earn-label">Override commission</span>
+          <span class="earn-val" id="ldr-override-earn" style="color:var(--accent2);">£0</span>
+        </div>
+        <div class="earn-row">
+          <span class="earn-label">Override rate applied</span>
+          <span class="earn-val" id="ldr-rate-val" style="color:var(--muted);">0%</span>
+        </div>
+        <div class="earn-row total-row">
+          <span class="earn-label">Total Commission (this month)</span>
+          <span class="earn-val" id="ldr-total">£0</span>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:10px;">
+          Team achievement of <span id="ldr-threshold-note" style="color:var(--amber);">—</span> required to unlock override.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nexus-note">
+    📡 <span>Team and department commission totals are consolidated from <strong>Nexus DMC</strong> on the last working day of each month. Leaders should review with their line manager before the 25th.</span>
+  </div>
+</div>
+
+
+<!-- ============================
+     COMPANY PAYOUT TAB
+============================= -->
+<div id="tab-company" class="tab-content">
+  <div class="section-title">🏢 Company-Wide Payout Modeller</div>
+  <div class="section-sub">Model total commission liability across all departments. For Finance and Senior Management use.</div>
+  <div class="payout-badge">⏱️ All commissions paid 1 month in arrears on the 5th</div>
+
+  <div class="grid-2 mb-6">
+    <div class="card">
+      <div class="card-title">⚙️ Scenario Settings</div>
+
+      <div>
+        <label class="field-label">Department to model</label>
+        <select id="co-dept" onchange="calcCompany()">
+          <option value="sales">Sales (42 staff)</option>
+          <option value="operations">Operations (285 staff)</option>
+          <option value="ticketing">Ticketing (48 staff)</option>
+          <option value="service">Customer Service (65 staff)</option>
+          <option value="marketing">Marketing (18 staff)</option>
+          <option value="all" selected>All Departments (697 staff)</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="field-label">Focus destination (for sales modelling)</label>
+        <select id="co-dest" onchange="calcCompany()">
+          <option value="8">Standard — £8</option>
+          <option value="25" selected>Thailand / Dubai / SG — £25</option>
+          <option value="35">Turkey — £35</option>
+          <option value="45">Europe — £45</option>
+          <option value="60">Long Haul — £60</option>
+        </select>
+      </div>
+
+      <div class="slider-wrap">
+        <div class="slider-label">
+          <span>Average bookings per sales staff</span>
+          <span class="slider-val" id="co-book-val">15</span>
+        </div>
+        <input type="range" id="co-book" min="5" max="40" value="15" oninput="calcCompany()">
+      </div>
+
+      <div class="slider-wrap">
+        <div class="slider-label">
+          <span>% of bookings on focus destination</span>
+          <span class="slider-val" id="co-focus-val">30</span>%
+        </div>
+        <input type="range" id="co-focus" min="0" max="100" value="30" oninput="calcCompany()">
+      </div>
+
+      <div>
+        <label class="field-label">Overall team achievement level</label>
+        <select id="co-achieve" onchange="calcCompany()">
+          <option value="0.7">70% — Below target (no accelerators)</option>
+          <option value="1.0" selected>100% — On target</option>
+          <option value="1.3">130% — Over target</option>
+          <option value="1.5">150% — Exceptional</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💰 Payout Summary</div>
+      <div class="grid-2 mb-4" style="gap:12px;">
+        <div class="stat-box"><div class="stat-label">Staff Modelled</div><div class="stat-val blue" id="co-staff">697</div></div>
+        <div class="stat-box"><div class="stat-label">Total Bookings</div><div class="stat-val purple" id="co-bookings">—</div></div>
+        <div class="stat-box"><div class="stat-label">Avg Per Person</div><div class="stat-val amber" id="co-avg">—</div></div>
+        <div class="stat-box" style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);">
+          <div class="stat-label" style="color:var(--green);">Monthly Total</div>
+          <div class="stat-val green" id="co-total">—</div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="coChart"></canvas>
+      </div>
+
+      <div class="grid-2 mt-4" style="gap:12px;">
+        <div class="stat-box">
+          <div class="stat-label">Monthly Liability</div>
+          <div class="stat-val" id="co-month" style="color:white;">—</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Annualised Liability</div>
+          <div class="stat-val green" id="co-year">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nexus-note">
+    📡 <span>Modelling only — actual payouts calculated from <strong>Nexus DMC</strong> data. This tool uses simplified averages for scenario planning. Finance uses actual Nexus exports for payroll.</span>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ==================== TAB SWITCHING ====================
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ==================== HELPERS ====================
+function fmt(n) { return '£' + Math.round(n).toLocaleString('en-GB'); }
+function qualBox(met, msg) {
+  return `<div class="threshold ${met ? 'met' : 'unmet'}">${met ? '✅' : '❌'} ${msg}</div>`;
+}
+function warnBox(msg) { return `<div class="threshold warn">⚠️ ${msg}</div>`; }
+function highlightTier(prefix, idx) {
+  [1,2,3].forEach(i => {
+    const el = document.getElementById(prefix + '-tier-' + i);
+    if (el) el.classList.toggle('highlight', i === idx);
+  });
+}
+
+// ==================== SALES ====================
+let destRate = 25;
+function setDest(rate, label) {
+  destRate = rate;
+  document.querySelectorAll('.dest-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('dest-label').innerHTML = `Selected: <strong style="color:var(--accent);">${label} — £${rate}/booking</strong>`;
+  calcSales();
+}
+
+function calcSales() {
+  const bookings = parseInt(document.getElementById('s-book').value);
+  const focusCount = Math.min(parseInt(document.getElementById('s-focus').value), bookings);
+  const tours = parseInt(document.getElementById('s-tour').value);
+  const cancels = parseInt(document.getElementById('s-cancel').value);
+
+  document.getElementById('s-book-val').textContent = bookings;
+  document.getElementById('s-focus-val').textContent = focusCount;
+  document.getElementById('s-tour-val').textContent = tours;
+  document.getElementById('s-cancel-val').textContent = cancels;
+
+  const cancelRate = bookings > 0 ? (cancels / bookings) * 100 : 0;
+  const netBookings = bookings - cancels;
+  const qualifies = netBookings >= 12;
+  const cancelOk = cancelRate < 5;
+
+  // Tier multiplier
+  let mult = 1.0, tierIdx = 0;
+  if (netBookings >= 30) { mult = 1.25; tierIdx = 3; }
+  else if (netBookings >= 20) { mult = 1.10; tierIdx = 2; }
+  else if (netBookings >= 12) { mult = 1.0; tierIdx = 1; }
+
+  let qualHtml = qualBox(qualifies, qualifies ? `Qualified — ${netBookings} net bookings (min 12)` : `Not qualified — only ${netBookings} net bookings. Need 12 minimum.`);
+  qualHtml += qualBox(cancelOk, cancelOk ? `Cancellation rate OK — ${cancelRate.toFixed(1)}% (max 5%)` : `Cancellation rate too high — ${cancelRate.toFixed(1)}%. Max 5%.`);
+  document.getElementById('s-qual-check').innerHTML = qualHtml;
+
+  highlightTier('tier-row', tierIdx);
+
+  if (!qualifies || !cancelOk) {
+    document.getElementById('s-std-earn').textContent = '£0';
+    document.getElementById('s-focus-earn').textContent = '£0';
+    document.getElementById('s-tour-earn').textContent = '£0';
+    document.getElementById('s-total').textContent = '£0';
+    return;
+  }
+
+  const stdCount = netBookings - focusCount;
+  const stdEarn = stdCount * 8 * mult;
+  const focusEarn = focusCount * destRate * mult;
+  const tourEarn = tours * 80;
+  const total = stdEarn + focusEarn + tourEarn;
+
+  document.getElementById('s-std-earn').textContent = fmt(stdEarn);
+  document.getElementById('s-focus-earn').textContent = fmt(focusEarn);
+  document.getElementById('s-tour-earn').textContent = fmt(tourEarn);
+  document.getElementById('s-total').textContent = fmt(total);
+
+  const now = new Date();
+  const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 5);
+  document.getElementById('s-payout-month').textContent = nextMonth.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+}
+
+// ==================== OPERATIONS ====================
+function calcOps() {
+  const queries = parseInt(document.getElementById('o-queries').value);
+  const rate = parseInt(document.getElementById('o-rate').value);
+  const teamSize = parseInt(document.getElementById('o-team').value);
+
+  document.getElementById('o-q-val').textContent = queries;
+  document.getElementById('o-rate-val').textContent = rate;
+
+  const qualifies = rate >= 80;
+  document.getElementById('o-qual-check').innerHTML = qualBox(qualifies,
+    qualifies ? `Team resolution rate OK — ${rate}% (min 80%)` : `Team rate too low — ${rate}%. Need 80% minimum.`);
+
+  let pool = 0, tierIdx = 0;
+  if (rate >= 95) { pool = 280; tierIdx = 3; }
+  else if (rate >= 90) { pool = 200; tierIdx = 2; }
+  else if (rate >= 80) { pool = 120; tierIdx = 1; }
+
+  highlightTier('o', tierIdx);
+
+  const share = qualifies ? pool / teamSize : 0;
+  const indEarn = qualifies ? queries * 1.5 : 0;
+  const total = share + indEarn;
+
+  document.getElementById('o-pool-earn').textContent = fmt(share);
+  document.getElementById('o-ind-earn').textContent = fmt(indEarn);
+  document.getElementById('o-total').textContent = fmt(total);
+}
+
+// ==================== TICKETING ====================
+function calcTicketing() {
+  const savings = parseInt(document.getElementById('t-savings').value);
+  const tickets = parseInt(document.getElementById('t-tickets').value);
+
+  document.getElementById('t-save-val').textContent = savings.toLocaleString('en-GB');
+  document.getElementById('t-tickets-val').textContent = tickets;
+
+  const qualifies = savings >= 500;
+  document.getElementById('t-qual-check').innerHTML = qualBox(qualifies,
+    qualifies ? `Qualified — £${savings.toLocaleString()} savings (min £500)` : `Not qualified — only £${savings.toLocaleString()} savings. Need £500 minimum.`);
+
+  let saveEarn = 0, tierIdx = 0;
+  if (savings >= 2000) {
+    saveEarn = (savings - 500) * 0.25; tierIdx = 2;
+  } else if (savings >= 500) {
+    saveEarn = (savings - 500) * 0.20; tierIdx = 1;
+  }
+
+  const volEarn = Math.max(0, tickets - 30) * 2;
+
+  highlightTier('t', tierIdx);
+
+  document.getElementById('t-save-earn').textContent = fmt(saveEarn);
+  document.getElementById('t-vol-earn').textContent = fmt(volEarn);
+  document.getElementById('t-total').textContent = fmt(saveEarn + volEarn);
+}
+
+// ==================== CUSTOMER SERVICE ====================
+function calcService() {
+  const contacts = parseInt(document.getElementById('cs-contacts').value);
+  const complaints = parseInt(document.getElementById('cs-complaints').value);
+  const csat = parseInt(document.getElementById('cs-csat').value);
+
+  document.getElementById('cs-contacts-val').textContent = contacts;
+  document.getElementById('cs-complaints-val').textContent = complaints;
+  document.getElementById('cs-csat-val').textContent = csat;
+
+  const complaintRate = contacts > 0 ? (complaints / contacts) * 100 : 0;
+  const qualifies = complaintRate < 5;
+
+  document.getElementById('cs-qual-check').innerHTML =
+    qualBox(qualifies, qualifies
+      ? `Complaint rate OK — ${complaintRate.toFixed(1)}% (max 5%)`
+      : `Complaint rate too high — ${complaintRate.toFixed(1)}%. Max 5%.`);
+
+  const expectedComplaints = Math.floor(contacts * 0.03); // expected at 3% baseline
+  const prevented = Math.max(0, expectedComplaints - complaints);
+  const preventEarn = qualifies ? prevented * 8 : 0;
+
+  let csatBonus = 0, tierIdx = 0;
+  if (csat >= 90) { csatBonus = 100; tierIdx = 3; }
+  else if (csat >= 80) { csatBonus = 60; tierIdx = 2; }
+  else if (csat >= 70) { csatBonus = 30; tierIdx = 1; }
+
+  highlightTier('cs', tierIdx);
+
+  document.getElementById('cs-prevent-earn').textContent = fmt(preventEarn);
+  document.getElementById('cs-csat-earn').textContent = fmt(csatBonus);
+  document.getElementById('cs-total').textContent = fmt(preventEarn + csatBonus);
+}
+
+// ==================== MARKETING ====================
+function calcMarketing() {
+  const baseline = parseInt(document.getElementById('mk-baseline').value);
+  const actual = parseInt(document.getElementById('mk-actual').value);
+  const rate = parseFloat(document.getElementById('mk-type').value);
+
+  document.getElementById('mk-baseline-val').textContent = baseline.toLocaleString('en-GB');
+  document.getElementById('mk-actual-val').textContent = actual.toLocaleString('en-GB');
+
+  const improvement = baseline > 0 ? ((actual - baseline) / baseline) * 100 : 0;
+  document.getElementById('mk-improvement').textContent = improvement.toFixed(1) + '%';
+  document.getElementById('mk-improvement').style.color = improvement >= 15 ? 'var(--green)' : 'var(--red)';
+
+  const qualifies = improvement >= 15;
+  document.getElementById('mk-qual-check').innerHTML = qualBox(qualifies,
+    qualifies
+      ? `Qualified — ${improvement.toFixed(1)}% ROI improvement (min 15%)`
+      : `Not qualified — only ${improvement.toFixed(1)}% improvement. Need 15%.`);
+
+  let mult = 1.0, tierIdx = 0;
+  if (improvement >= 50) { mult = 2.0; tierIdx = 3; }
+  else if (improvement >= 25) { mult = 1.5; tierIdx = 2; }
+  else if (improvement >= 15) { mult = 1.0; tierIdx = 1; }
+
+  highlightTier('mk', tierIdx);
+
+  const uplift = Math.max(0, actual - baseline);
+  const baseComm = qualifies ? uplift * rate : 0;
+  const total = baseComm * mult;
+
+  document.getElementById('mk-comm-earn').textContent = fmt(baseComm);
+  document.getElementById('mk-mult-val').textContent = mult.toFixed(1) + 'x';
+  document.getElementById('mk-total').textContent = fmt(total);
+}
+
+// ==================== LEADERSHIP ====================
+function calcLeadership() {
+  const roleRate = parseFloat(document.getElementById('ldr-role').value);
+  const teamComm = parseInt(document.getElementById('ldr-team').value);
+  const achieve = parseInt(document.getElementById('ldr-achieve').value);
+  const isManager = roleRate === 0.25;
+  const threshold = isManager ? 85 : 80;
+
+  document.getElementById('ldr-team-val').textContent = teamComm.toLocaleString('en-GB');
+  document.getElementById('ldr-achieve-val').textContent = achieve;
+  document.getElementById('ldr-threshold-note').textContent = threshold + '%';
+
+  const qualifies = achieve >= threshold;
+  document.getElementById('ldr-qual-check').innerHTML = qualBox(qualifies,
+    qualifies
+      ? `Override unlocked — team at ${achieve}% (need ${threshold}%)`
+      : `Override not earned — team at ${achieve}%. Need ${threshold}%.`);
+
+  const overrideEarn = qualifies ? teamComm * roleRate : 0;
+  document.getElementById('ldr-override-earn').textContent = fmt(overrideEarn);
+  document.getElementById('ldr-rate-val').textContent = (roleRate * 100) + '%';
+  document.getElementById('ldr-total').textContent = fmt(overrideEarn);
+}
+
+// ==================== COMPANY PAYOUT ====================
+const staffCounts = { sales: 42, operations: 285, ticketing: 48, service: 65, marketing: 18, all: 697 };
+let coChart = null;
+
+function calcCompany() {
+  const dept = document.getElementById('co-dept').value;
+  const destR = parseInt(document.getElementById('co-dest').value);
+  const bookings = parseInt(document.getElementById('co-book').value);
+  const focusPct = parseInt(document.getElementById('co-focus').value);
+  const achieve = parseFloat(document.getElementById('co-achieve').value);
+
+  document.getElementById('co-book-val').textContent = bookings;
+  document.getElementById('co-focus-val').textContent = focusPct;
+
+  const staff = staffCounts[dept] || 697;
+  document.getElementById('co-staff').textContent = staff.toLocaleString();
+
+  const totalBookings = staff * bookings;
+  document.getElementById('co-bookings').textContent = totalBookings.toLocaleString('en-GB');
+
+  const focusBookings = Math.floor(totalBookings * focusPct / 100);
+  const stdBookings = totalBookings - focusBookings;
+
+  const stdComm = stdBookings * 8 * achieve;
+  const focusComm = focusBookings * destR * achieve;
+  const leadershipComm = (stdComm + focusComm) * 0.18;
+  const total = stdComm + focusComm + leadershipComm;
+  const avg = total / staff;
+
+  document.getElementById('co-avg').textContent = fmt(avg);
+  document.getElementById('co-total').textContent = fmt(total);
+  document.getElementById('co-month').textContent = fmt(total);
+  document.getElementById('co-year').textContent = fmt(total * 12);
+
+  // Chart
+  const ctx = document.getElementById('coChart');
+  if (coChart) coChart.destroy();
+  coChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Standard Bookings', 'Focus Destination', 'Leadership Override'],
+      datasets: [{
+        data: [Math.round(stdComm), Math.round(focusComm), Math.round(leadershipComm)],
+        backgroundColor: ['#3b82f6', '#8b5cf6', '#f59e0b'],
+        borderWidth: 0, hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right', labels: { color: '#94a3b8', font: { family: 'DM Sans', size: 12 }, padding: 16 } },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` £${Math.round(ctx.raw).toLocaleString('en-GB')}`
+          }
         }
+      }
+    }
+  });
+}
 
-        // Company Calculator
-        function updateCompany() {
-            const dept = document.getElementById('comp-dept').value;
-            const destRate = parseInt(document.getElementById('comp-dest').value);
-            const bookings = parseInt(document.getElementById('comp-book').value);
-            const focus = parseInt(document.getElementById('comp-focus').value);
-            const achieve = parseFloat(document.getElementById('comp-achieve').value);
-
-            document.getElementById('comp-book-val').textContent = bookings;
-            document.getElementById('comp-focus-val').textContent = focus;
-
-            const staff = dept === 'all' ? 697 : staffCounts[dept];
-            const totalBookings = staff * bookings;
-            const focusBookings = Math.floor(totalBookings * focus / 100);
-            const stdBookings = totalBookings - focusBookings;
-
-            const stdComm = stdBookings * 500 * achieve;
-            const focusComm = focusBookings * destRate * achieve;
-            const leadership = (stdComm + focusComm) * 0.15;
-            const total = stdComm + focusComm + leadership;
-            const avg = total / staff;
-
-            document.getElementById('comp-staff').textContent = staff;
-            document.getElementById('comp-bookings').textContent = totalBookings.toLocaleString();
-            document.getElementById('comp-avg').textContent = '₹' + Math.floor(avg).toLocaleString();
-            document.getElementById('comp-total').textContent = '₹' + Math.floor(total).toLocaleString();
-            document.getElementById('comp-month').textContent = '₹' + Math.floor(total).toLocaleString();
-            document.getElementById('comp-year').textContent = '₹' + Math.floor(total * 12).toLocaleString();
-            document.getElementById('header-payout').textContent = '₹' + Math.floor(total).toLocaleString();
-
-            updateChart(stdComm, focusComm, leadership);
-        }
-
-        let chartInstance = null;
-        function updateChart(std, focus, lead) {
-            const ctx = document.getElementById('compChart');
-            if (!ctx) return;
-
-            if (chartInstance) chartInstance.destroy();
-
-            chartInstance = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Standard', 'Focus Dest', 'Leadership'],
-                    datasets: [{
-                        data: [std, focus, lead],
-                        backgroundColor: ['#3b82f6', '#a855f7', '#6366f1'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { position: 'right', labels: { color: '#94a3b8' } } }
-                }
-            });
-        }
-
-        // Sales Calculator
-        function updateSales() {
-            const bookings = parseInt(document.getElementById('sales-book').value);
-            const focus = parseInt(document.getElementById('sales-focus').value);
-            const tours = parseInt(document.getElementById('sales-tour').value);
-
-            document.getElementById('sales-book-val').textContent = bookings;
-            document.getElementById('sales-focus-val').textContent = focus;
-            document.getElementById('sales-tour-val').textContent = tours;
-
-            const focusCount = Math.floor(bookings * focus / 100);
-            const stdCount = bookings - focusCount;
-
-            const stdComm = stdCount * 500;
-            const focusComm = focusCount * 1500;
-            const tourComm = tours * 2000;
-            const total = stdComm + focusComm + tourComm;
-
-            document.getElementById('sales-std').textContent = '₹' + stdComm.toLocaleString();
-            document.getElementById('sales-focus-comm').textContent = '₹' + focusComm.toLocaleString();
-            document.getElementById('sales-tour-comm').textContent = '₹' + tourComm.toLocaleString();
-            document.getElementById('sales-total').textContent = '₹' + total.toLocaleString();
-        }
-
-        // Operations Calculator
-        function updateOps() {
-            const queries = parseInt(document.getElementById('ops-queries').value);
-            const rate = parseInt(document.getElementById('ops-rate').value);
-
-            document.getElementById('ops-queries-val').textContent = queries;
-            document.getElementById('ops-rate-val').textContent = rate;
-
-            let pool = rate >= 95 ? 15000 : rate >= 90 ? 12000 : rate >= 80 ? 8000 : 4000;
-            const share = pool / 8;
-            const ind = queries * 100;
-            const total = share + ind;
-
-            document.getElementById('ops-pool').textContent = '₹' + pool.toLocaleString();
-            document.getElementById('ops-ind').textContent = '₹' + ind.toLocaleString();
-            document.getElementById('ops-total').textContent = '₹' + Math.floor(total).toLocaleString();
-        }
-
-        // Initialize
-        updateCompany();
-        updateSales();
-        updateOps();
-    </script>
+// ==================== INIT ====================
+calcSales();
+calcOps();
+calcTicketing();
+calcService();
+calcMarketing();
+calcLeadership();
+calcCompany();
+</script>
 </body>
 </html>
